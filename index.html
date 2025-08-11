@@ -37,12 +37,20 @@
         <form id="postForm">
             <input type="text" id="title" name="title" placeholder="Enter title" required>
             <textarea id="body" name="body" placeholder="Enter body" rows="4" required></textarea>
-            <input type="number" id="updateId" placeholder="Enter Post ID">
             <button type="submit" id="formButton">Submit Post</button>
         </form>
-
         <div id="postResult" class="postResult">
+        </div>
+        <br>
+        <br>
+        <form id="updateForm">
+            <input type="number" id="updateId" placeholder="Enter Post ID" required>
+            <input type="text" id="updateTitle" placeholder="Updated title" required>
+            <textarea id="updateBody" placeholder="Updated body" rows="4" required></textarea>
+            <button type="submit">Update Post</button>
+        </form>
 
+        <div id="updateResult" class="result">
         </div>
 
     </section>

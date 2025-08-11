@@ -105,10 +105,12 @@ function errorDisplay(targetId, message) {
 
 // Part 4: 
 
-document.getElementById('postForm').addEventListener('submit', (e) => {
+document.getElementById('updateForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
     const id = document.getElementById('updateId').value;
+    const title = document.getElementById('updateTitle').value;
+    const body = document.getElementById('updateBody').value;
 
     document.getElementById('postResult').textContent = "Updating...";
 
@@ -121,6 +123,8 @@ document.getElementById('postForm').addEventListener('submit', (e) => {
             const data = JSON.parse(xhr.responseText);
             document.getElementById('updateResult').innerHTML = `
             <p>ID: ${data.id}</p>
+            <p>Title: ${data.title}</p>
+            <p>Body: ${data.body}</p>
           `;
         } else {
             errorDisplay('updateResult', `Request failed with status ${xhr.status}`);
@@ -131,5 +135,5 @@ document.getElementById('postForm').addEventListener('submit', (e) => {
         errorDisplay('updateResult', 'Network error occurred.');
     };
 
-    xhr.send(JSON.stringify({ id, title, body, userId: 1 }));
+    xhr.send(JSON.stringify({ id, title, body }));
 });
