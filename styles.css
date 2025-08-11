@@ -1,0 +1,49 @@
+body {
+    font-family: monospace;
+    color: blue;
+    background-color: black;
+}
+
+header {
+    font-size: xx-large;
+    font-weight: 800;
+    text-align: center;
+}
+
+h2 {
+    font-size: x-large;
+    font-weight: 800;
+}
+
+.first-section {
+    border: 2px solid blue;
+    width: 60%;
+    padding: 10px 10px;
+    margin-top: 5%;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 5px;
+}
+
+button:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.fetch-div {
+    border: 1px solid blue;
+    width: 40%;
+    padding: 10px 10px;
+    margin-top: 5%;
+}
+
+.second-section {
+    border: 2px solid blue;
+    width: 60%;
+    padding: 10px 10px;
+    margin-top: 10%;
+}
