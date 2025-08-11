@@ -47,3 +47,10 @@ button:hover {
     padding: 10px 10px;
     margin-top: 10%;
 }
+
+.postResult {
+    border: 1px solid blue;
+    width: 40%;
+    padding: 10px 10px;
+    margin-top: 5%;
+}
