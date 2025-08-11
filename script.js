@@ -50,3 +50,86 @@ document.getElementById('fetch-xhr').addEventListener('click', function () {
 
 // Part 3: Send data using POST
 
+
+document.getElementById('formButton').addEventListener('click', () => {
+    const output = document.getElementById('output');
+    output.textContent = "Loading...";
+
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+        .then(response => {
+            if (!response.ok) throw new Error(`Error: ${response.status}`);
+            return response.json();
+        })
+        .then(data => displayPost(data.title, data.body))
+        .catch(error => errorDisplay('output', error.message));
+});
+
+
+document.getElementById('postForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const body = document.getElementById('body').value;
+
+    document.getElementById('postResult').textContent = "Loading...";
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        body: JSON.stringify({ title, body, userId: 1 })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('postResult').innerHTML = `
+          <p>ID: ${data.id}</p>
+          <p>Title: ${data.title}</p>
+          <p>Body: ${data.body}</p>
+        `;
+        })
+        .catch(error => errorDisplay('postResult', error.message));
+});
+
+function displayPost(title, body) {
+    document.getElementById('output').innerHTML = `
+        <h3>${title}</h3>
+        <p>${body}</p>
+      `;
+}
+
+function errorDisplay(targetId, message) {
+    document.getElementById(targetId).innerHTML = `<p class="error">Error: ${message}</p>`;
+}
+
+// Part 4: 
+
+document.getElementById('postForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById('updateId').value;
+
+    document.getElementById('postResult').textContent = "Updating...";
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', `https://jsonplaceholder.typicode.com/posts/${id}`, true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            document.getElementById('updateResult').innerHTML = `
+            <p>ID: ${data.id}</p>
+          `;
+        } else {
+            errorDisplay('updateResult', `Request failed with status ${xhr.status}`);
+        }
+    };
+
+    xhr.onerror = function () {
+        errorDisplay('updateResult', 'Network error occurred.');
+    };
+
+    xhr.send(JSON.stringify({ id, title, body, userId: 1 }));
+});
